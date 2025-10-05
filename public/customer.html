@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Customer - Dairy</title>
+  </head>
+  <body>
+    <h1>Customer</h1>
+    <p>Enter your Customer ID to see today's plan and add extra milk</p>
+    <input id="custId" placeholder="Customer ID" />
+    <button id="load">Load Plan</button>
+    <pre id="plan"></pre>
+
+    <h3>Add Extra</h3>
+    <input id="extra" type="number" step="0.1" placeholder="Extra liters" />
+    <button id="addExtra">Add</button>
+    <pre id="res"></pre>
+
+    <script>
+      document.getElementById('load').addEventListener('click', ()=>{
+        const id = document.getElementById('custId').value.trim();
+        if(!id) return alert('enter id');
+        fetch('/api/customer/'+id+'/plan').then(r=>r.json()).then(j=>document.getElementById('plan').innerText = JSON.stringify(j, null, 2))
+      })
+
+      document.getElementById('addExtra').addEventListener('click', ()=>{
+        const id = document.getElementById('custId').value.trim();
+        const extra = parseFloat(document.getElementById('extra').value || '0');
+        if(!id) return alert('enter id');
+        fetch('/api/customer/'+id+'/extra', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ extraLiters: extra })}).then(r=>r.json()).then(j=>document.getElementById('res').innerText = JSON.stringify(j, null, 2))
+      })
+    </script>
+  </body>
+  </html>

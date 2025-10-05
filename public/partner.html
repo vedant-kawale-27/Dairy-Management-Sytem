@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Partner - Dairy</title>
+  </head>
+  <body>
+    <h1>Delivery Partner</h1>
+    <p>Enter your Partner ID to see today's deliveries</p>
+    <input id="partnerId" placeholder="Partner ID" />
+    <button id="load">Load Today's Deliveries</button>
+    <pre id="out"></pre>
+
+    <script>
+      document.getElementById('load').addEventListener('click', ()=>{
+        const id = document.getElementById('partnerId').value.trim();
+        if(!id) return alert('enter id');
+        fetch('/api/partner/'+id+'/deliveries').then(r=>r.json()).then(j=>document.getElementById('out').innerText = JSON.stringify(j, null, 2))
+      })
+    </script>
+  </body>
+  </html>
