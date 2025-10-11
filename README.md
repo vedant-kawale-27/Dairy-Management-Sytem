@@ -1,4 +1,4 @@
-# Dairy Management System (minimal)
+# DairyVision : A Smart Web Portal for Strengthening and Managing Dairy Infrastructure
 
 Simple Node.js + Express app demonstrating three roles: admin, delivery partner, and customer.
 
